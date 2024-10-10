@@ -5,6 +5,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service class to send queries and return outputs from the database
+ * @author Adam Cichoski
+ */
 @Service
 public class AnimalService {
 
@@ -13,7 +17,7 @@ public class AnimalService {
 
     /**
      * Finds all animals in the database
-     * @return
+     * @return a list of all animals in the table
      */
     public List<Animal> getAllAnimals(){
         return animalRepo.findAll();
@@ -22,7 +26,7 @@ public class AnimalService {
     /**
      * Gets animals by animalId unique attribute
      * @param animalId
-     * @return
+     * @return the animal in the table with the inputted id
      */
     public Animal getAnimalByAnimalId(int animalId){
         return animalRepo.findById(animalId).orElse(null);
@@ -31,7 +35,7 @@ public class AnimalService {
     /**
      * Returns the animal by the species
      * @param species
-     * @return
+     * @return any species with matching or similar species names
      */
     public List<Animal> getAnimalBySpecies(String species){
         return animalRepo.getAnimalBySpecies(species);
@@ -40,7 +44,7 @@ public class AnimalService {
     /**
      * Returns the animal by the name
      * @param name
-     * @return
+     * @return any animals with a matching or similar name
      */
     public List<Animal> getAnimalByName(String name){
         return animalRepo.getAnimalByName(name);
@@ -48,16 +52,18 @@ public class AnimalService {
 
     /**
      * Adds a new animal
-     * @param a
+     * @param a inputted animal to be saved to the database
      */
     public void addAnimal(Animal a){
         animalRepo.save(a);
     }
 
     /**
-     *
-     * @param animalId
-     * @param animal
+     * Updates the values of an existing animal in the database
+     * @param animalId unique animal id to find the correct animal to update
+     * @param animal new animal containing the desired values to update
+     * If non-required attributes are left null in the new animal, they will be automatically filled in with the attributes
+     * from the existing animal
      */
     public void updateAnimal(int animalId, Animal animal){
         Animal existing = getAnimalByAnimalId(animalId);
@@ -66,7 +72,6 @@ public class AnimalService {
         existing.setSpecies(animal.getSpecies());
         existing.setHabitat(animal.getHabitat());
         existing.setDescription(animal.getDescription() == null? existing.getDescription() : animal.getDescription());
-
         animalRepo.save(animal);
     }
 }

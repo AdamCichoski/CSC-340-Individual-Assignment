@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for mapping, creating, and updating animal objects in the database
+ * @author Adam Cichoski
+ */
 @RestController
 @RequestMapping("/animal")
 public class AnimalController {
@@ -61,6 +65,15 @@ public class AnimalController {
     /**
      * Posts a new animal into the database
      * localhost:8080/animal/new
+     * Example Body:
+     * {
+     *     "animalId": 1,
+     *     "name": "temp",
+     *     "species": "temp",
+     *     "habitat": "temp",
+     *     "scientificName": "temp",
+     *     "description":"temp"
+     * }
      * @param a
      * @return
      */
@@ -71,6 +84,23 @@ public class AnimalController {
     }
 
 
+    /**
+     * Method to update the values of an animal
+     * localhost:8080/animal/update/{animalId}
+     * Example Body:
+     * {
+     *     "animalId": 1,
+     *     "name": "temp",
+     *     "species": "temp",
+     *     "habitat": "temp",
+     *     "scientificName": "temp",
+     *     "description":"temp"
+     * }
+     * If non-required values are left null, they will be filled in with currently used values
+     * @param animalId
+     * @param animal
+     * @return
+     */
     @PutMapping("/update/{animalId}")
     public Animal updateAnimal(@PathVariable int animalId, @RequestBody Animal animal){
         animalService.updateAnimal(animalId, animal);

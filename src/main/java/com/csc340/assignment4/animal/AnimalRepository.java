@@ -7,12 +7,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
+ * Repository to store queries for animals
  * @author Adam Cichoski
  */
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Integer> {
     /**
      * Query to match species
+     * Matches to any species containing the values in the species parameter
      * @param species
      * @return
      */
@@ -20,7 +22,8 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
     List<Animal> getAnimalBySpecies(String species);
 
     /**
-     * Query to match name
+     * Query to match
+     * Matches to any name containing the values in the name parameter
      * @param name
      * @return
      */

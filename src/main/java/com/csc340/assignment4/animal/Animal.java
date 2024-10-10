@@ -2,6 +2,10 @@ package com.csc340.assignment4.animal;
 
 import jakarta.persistence.*;
 
+/**
+ * Class to store column information for animal table
+ * @author Adam Cichoski
+ */
 @Entity
 @Table(name= "animal")
 public class Animal {
@@ -25,7 +29,7 @@ public class Animal {
     private String description;
 
     /**
-     * Constructor
+     * Constructor to fill in all values
      * @param animalId
      * @param name
      * @param species
@@ -43,7 +47,7 @@ public class Animal {
     }
 
     /**
-     * Constructor
+     * Constructor to fill in only required attributes that are not automatically filled
      * @param name
      * @param species
      * @param habitat
@@ -53,11 +57,6 @@ public class Animal {
         this.species = species;
         this.habitat = habitat;
     }
-
-    /**
-     * Basic constructor
-     */
-    public Animal(){}
 
     public int getAnimalId() {
         return animalId;
