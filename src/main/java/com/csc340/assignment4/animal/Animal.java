@@ -58,6 +58,13 @@ public class Animal {
         this.habitat = habitat;
     }
 
+    /**
+     * Default constructor
+     */
+    public Animal(){
+
+    }
+
     public int getAnimalId() {
         return animalId;
     }

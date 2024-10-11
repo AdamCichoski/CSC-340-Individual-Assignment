@@ -51,6 +51,28 @@ public class AnimalService {
     }
 
     /**
+     * Returns animals by scientific name
+     * @param scientificName
+     * @return all animals with a matching or similar scientificName value
+     */
+    public List<Animal> getAnimalByScientificName(String scientificName){
+        return animalRepo.getAnimalByScientificName(scientificName);
+    }
+
+    /**
+     * Returns animals by habitat
+     * @param habitat
+     * @return all animals with a matching or similar habitat
+     */
+    public List<Animal> getAnimalByHabitat(String habitat){
+        return animalRepo.getAnimalByHabitat(habitat);
+    }
+
+    public List<Animal> getAnimalByDescription(String description){
+        return animalRepo.getAnimalByDescription(description);
+    }
+
+    /**
      * Adds a new animal
      * @param a inputted animal to be saved to the database
      */
@@ -72,7 +94,16 @@ public class AnimalService {
         existing.setSpecies(animal.getSpecies());
         existing.setHabitat(animal.getHabitat());
         existing.setDescription(animal.getDescription() == null? existing.getDescription() : animal.getDescription());
-        animalRepo.save(animal);
+
+        animalRepo.save(existing);
+    }
+
+    /**
+     * Deletes an animal from the database
+     * @param animal the specific animal to be deleted
+     */
+    public void deleteAnimal(Animal animal){
+        animalRepo.delete(animal);
     }
 }
 

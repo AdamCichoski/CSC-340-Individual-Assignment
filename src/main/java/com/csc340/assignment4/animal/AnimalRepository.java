@@ -22,7 +22,7 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
     List<Animal> getAnimalBySpecies(String species);
 
     /**
-     * Query to match
+     * Query to match by name
      * Matches to any name containing the values in the name parameter
      * @param name
      * @return
@@ -30,4 +30,28 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
     @Query(value= "SELECT * FROM animal WHERE name LIKE %:name%", nativeQuery = true)
     List<Animal> getAnimalByName(String name);
 
+
+    /**
+     * Query to match by scientific name
+     * @param scientificName
+     * @return
+     */
+    @Query(value = "SELECT * FROM animal WHERE scientificName LIKE %:scientificName%", nativeQuery = true)
+    List<Animal> getAnimalByScientificName(String scientificName);
+
+    /**
+     * Query to extract animals by habitat
+     * @param habitat
+     * @return
+     */
+    @Query(value = "SELECT * FROM animal WHERE habitat LIKE %:habitat%",nativeQuery = true)
+    List<Animal> getAnimalByHabitat(String habitat);
+
+    /**
+     * Query to extract animals based on description
+     * @param description
+     * @return
+     */
+    @Query(value = "SELECT * FROM animal WHERE description LIKE %:description%", nativeQuery = true)
+    List<Animal> getAnimalByDescription(String description);
 }

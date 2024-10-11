@@ -30,8 +30,8 @@ public class AnimalController {
      * Returns a single animal by finding its animalId
      * localhost:8080/animal/{animalId}
      * Example: localhost:8080/animal/8888 returns a pig
-     * @param animalId
-     * @return
+     * @param animalId unique animal id to find specific animal
+     * @return animal with matching animalId
      */
     @GetMapping("/{animalId}")
     public Animal getAnimalByID(@PathVariable int animalId){
@@ -40,12 +40,12 @@ public class AnimalController {
 
     /**
      * Returns animals by matching the name
-     * localhost:8080/animal/name?name=temp
+     * localhost:8080/animal?name=temp
      * Example: localhost:8080/animal/name?name=Josh returns all animals named Josh
-     * @param name
-     * @return
+     * @param name name to match
+     * @return list of animals containing the name string
      */
-    @GetMapping("/name")
+    @GetMapping("")
     public List<Animal> getAnimalByName(@RequestParam(name="name", defaultValue = "pig") String name){
         return animalService.getAnimalByName(name);
     }
@@ -54,12 +54,44 @@ public class AnimalController {
      *
      * localhost:8080/animal/species?species=temp
      * Example: localhost:8080/animal/species?species=horse returns all horses
-     * @param species
-     * @return
+     * @param species species to match
+     * @return list of animals
      */
     @GetMapping("/species")
     public List<Animal> getAnimalBySpecies(@RequestParam String species){
         return animalService.getAnimalBySpecies(species);
+    }
+
+    /**
+     * Returns all animals with similar or matching scientific names to input value
+     * localhost:8080/animal/scientificName?scientificName=temp
+     * @param scientificName  scientific name to match
+     * @return list of animals
+     */
+    @GetMapping("/scientificName")
+    public List<Animal> getAnimalByScientificName(@RequestParam String scientificName){
+        return animalService.getAnimalByScientificName(scientificName);
+    }
+
+    /**
+     * Returns all animals with similar or matching habitat name to input value
+     * localhost:8080/animal/habitat?habitat=temp
+     * @param habitat habitat string to match
+     * @return all animals containing habitat string
+     */
+    @GetMapping("/habitat")
+    public List<Animal> getAnimalByHabitat(@RequestParam String habitat){
+        return animalService.getAnimalByHabitat(habitat);
+    }
+
+    /**
+     * Get mapping to all animals containing the description string
+     * @param description description to match
+     * @return all animals containing the description
+     */
+    @GetMapping("/description")
+    public List<Animal> getAnimalByDescription(@RequestParam String description){
+        return animalService.getAnimalByDescription(description);
     }
 
     /**
@@ -74,8 +106,8 @@ public class AnimalController {
      *     "scientificName": "temp",
      *     "description":"temp"
      * }
-     * @param a
-     * @return
+     * @param a new animal to be added
+     * @return list of animals
      */
     @PostMapping("/new")
     public List<Animal> addAnimal(@RequestBody Animal a){
@@ -97,13 +129,26 @@ public class AnimalController {
      *     "description":"temp"
      * }
      * If non-required values are left null, they will be filled in with currently used values
-     * @param animalId
-     * @param animal
-     * @return
+     * @param animalId unique animal id to find the right one to update
+     * @param animal new animal with updated values
+     * @return the animal updated
      */
     @PutMapping("/update/{animalId}")
     public Animal updateAnimal(@PathVariable int animalId, @RequestBody Animal animal){
         animalService.updateAnimal(animalId, animal);
         return animalService.getAnimalByAnimalId(animalId);
     }
+
+    /**
+     * Delete mapping. Deletes the individual animal based on inputted unique animal id value
+     * localhost:8080/animal/delete/{animalId}
+     * @param animalId unique animal id to find the right animal to delete
+     * @return list of animals
+     */
+    @DeleteMapping("delete/{animalId}")
+    public List<Animal> deleteAnimal(@PathVariable int animalId){
+        animalService.deleteAnimal(getAnimalByID(animalId));
+        return animalService.getAllAnimals();
+    }
+
 }
