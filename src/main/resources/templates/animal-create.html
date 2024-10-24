@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../navbar.css" rel="stylesheet">
+    <link href="../forms.css" rel="stylesheet">
+</head>
+<body>
+  <div class="topnav">
+      <a  href="/animal/all">Animals</a>
+      <a class="active" href="/animal/create">Create</a>
+  </div>
+  <main>
+      <section>
+          <div >
+              <form action="/animal/new" method="post">
+                  <h2>Animal</h2>
+                  <input type="text" placeholder="Name" name="name">
+                  <input type="text" placeholder="Species" name="species">
+                  <input type="text" placeholder="Habitat" name="habitat">
+                  <input type="text" placeholder="Scientific Name" name="scientificName">
+                  <input type="text" placeholder="Description" name="description">
+                  <div>
+                      <button type="submit">Submit</button>
+                  </div>
+              </form>
+          </div>
+      </section>
+  </main>
+</body>
+</html>

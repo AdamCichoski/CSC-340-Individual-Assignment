@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../navbar.css" rel="stylesheet">
+    <link href="../../forms.css" rel="stylesheet">
+</head>
+<body>
+    <div class="topnav">
+        <a  href="/animal/all">Animals</a>
+        <a class="active" href="/animal/create">Create</a>
+    </div>
+    <main>
+        <div>
+            <form action="../update" method="post">
+                ID
+                <br>
+                <input type="number" id="animalId" name="animalId" data-th-value="${animal.animalId}" readonly>
+                <br>Name<br>
+                <input data-th-value="${animal.name}" type="text" placeholder="Name" id="name" name="name">
+                <br>Species<br>
+                <input data-th-value="${animal.species}" type="text" placeholder="Species" id="species" name="species">
+                <br>Habitat<br>
+                <input data-th-value="${animal.habitat}" type="text" placeholder="Habitat" id="habitat" name="habitat">
+                <br>Scientific Name<br>
+                <input data-th-value="${animal.scientificName}" type="text" placeholder="Scientific Name" id="scientificName" name="scientificName">
+                <br>Description<br>
+                <input data-th-value="${animal.description}" type="text" placeholder="Description" id="description" name="description">
+                <br>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

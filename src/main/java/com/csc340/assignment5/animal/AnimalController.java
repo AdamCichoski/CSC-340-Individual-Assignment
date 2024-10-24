@@ -1,15 +1,16 @@
-package com.csc340.assignment4.animal;
+package com.csc340.assignment5.animal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * Controller for mapping, creating, and updating animal objects in the database
  * @author Adam Cichoski
  */
-@RestController
+@Controller
 @RequestMapping("/animal")
 public class AnimalController {
 
@@ -22,8 +23,9 @@ public class AnimalController {
      * @return
      */
     @GetMapping("/all")
-    public List<Animal> getAllAnimals(){
-        return animalService.getAllAnimals();
+    public String getAllAnimals(Model model){
+        model.addAttribute("animalList", animalService.getAllAnimals());
+        return "animal-list";
     }
 
     /**
@@ -34,8 +36,9 @@ public class AnimalController {
      * @return animal with matching animalId
      */
     @GetMapping("/{animalId}")
-    public Animal getAnimalByID(@PathVariable int animalId){
-        return animalService.getAnimalByAnimalId(animalId);
+    public String getAnimalByID(@PathVariable int animalId, Model model){
+        model.addAttribute("animal", animalService.getAnimalByAnimalId(animalId));
+        return "animal-details";
     }
 
     /**
@@ -46,8 +49,9 @@ public class AnimalController {
      * @return list of animals containing the name string
      */
     @GetMapping("")
-    public List<Animal> getAnimalByName(@RequestParam(name="name", defaultValue = "pig") String name){
-        return animalService.getAnimalByName(name);
+    public String getAnimalByName(@RequestParam(name="name", defaultValue = "pig") String name, Model model){
+        model.addAttribute("animalList", animalService.getAnimalByName(name));
+        return "animal-list";
     }
 
     /**
@@ -58,8 +62,18 @@ public class AnimalController {
      * @return list of animals
      */
     @GetMapping("/species")
-    public List<Animal> getAnimalBySpecies(@RequestParam String species){
-        return animalService.getAnimalBySpecies(species);
+    public String getAnimalBySpecies(@RequestParam String species, Model model){
+        model.addAttribute("animalList", animalService.getAnimalBySpecies(species));
+        return "animal-list";
+    }
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping("details")
+    public String animalDetails(){
+        return "animal-details";
     }
 
     /**
@@ -69,8 +83,9 @@ public class AnimalController {
      * @return list of animals
      */
     @GetMapping("/scientificName")
-    public List<Animal> getAnimalByScientificName(@RequestParam String scientificName){
-        return animalService.getAnimalByScientificName(scientificName);
+    public String getAnimalByScientificName(@RequestParam String scientificName, Model model){
+        model.addAttribute("animalList", animalService.getAnimalByScientificName(scientificName));
+        return "animal-list";
     }
 
     /**
@@ -80,8 +95,9 @@ public class AnimalController {
      * @return all animals containing habitat string
      */
     @GetMapping("/habitat")
-    public List<Animal> getAnimalByHabitat(@RequestParam String habitat){
-        return animalService.getAnimalByHabitat(habitat);
+    public String getAnimalByHabitat(@RequestParam String habitat, Model model){
+        model.addAttribute("animalList", animalService.getAnimalByHabitat(habitat));
+        return "animal-list";
     }
 
     /**
@@ -90,8 +106,9 @@ public class AnimalController {
      * @return all animals containing the description
      */
     @GetMapping("/description")
-    public List<Animal> getAnimalByDescription(@RequestParam String description){
-        return animalService.getAnimalByDescription(description);
+    public String getAnimalByDescription(@RequestParam String description, Model model){
+        model.addAttribute("animalList", animalService.getAnimalByDescription(description));
+        return "animal-list";
     }
 
     /**
@@ -110,9 +127,9 @@ public class AnimalController {
      * @return list of animals
      */
     @PostMapping("/new")
-    public List<Animal> addAnimal(@RequestBody Animal a){
+    public String addAnimal(Animal a){
         animalService.addAnimal(a);
-        return animalService.getAllAnimals();
+        return "redirect:/animal/all";
     }
 
 
@@ -129,14 +146,13 @@ public class AnimalController {
      *     "description":"temp"
      * }
      * If non-required values are left null, they will be filled in with currently used values
-     * @param animalId unique animal id to find the right one to update
      * @param animal new animal with updated values
      * @return the animal updated
      */
-    @PutMapping("/update/{animalId}")
-    public Animal updateAnimal(@PathVariable int animalId, @RequestBody Animal animal){
-        animalService.updateAnimal(animalId, animal);
-        return animalService.getAnimalByAnimalId(animalId);
+    @PostMapping("/update")
+    public String updateAnimal(Animal animal){
+        animalService.addAnimal(animal);
+        return "redirect:/animal/" + animal.getAnimalId();
     }
 
     /**
@@ -145,10 +161,31 @@ public class AnimalController {
      * @param animalId unique animal id to find the right animal to delete
      * @return list of animals
      */
-    @DeleteMapping("delete/{animalId}")
-    public List<Animal> deleteAnimal(@PathVariable int animalId){
-        animalService.deleteAnimal(getAnimalByID(animalId));
-        return animalService.getAllAnimals();
+    @GetMapping("delete/{animalId}")
+    public String deleteAnimal(@PathVariable int animalId){
+        animalService.deleteAnimal(animalService.getAnimalByAnimalId(animalId));
+        return "redirect:/animal/all";
+    }
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping("/create")
+    public String createAnimal(){
+        return "animal-create";
+    }
+
+    /**
+     *
+     * @param animalId
+     * @param model
+     * @return
+     */
+    @GetMapping("/update-form/{animalId}")
+    public String updateForm(@PathVariable int animalId, Model model){
+        model.addAttribute("animal", animalService.getAnimalByAnimalId(animalId));
+        return "animal-update";
     }
 
 }

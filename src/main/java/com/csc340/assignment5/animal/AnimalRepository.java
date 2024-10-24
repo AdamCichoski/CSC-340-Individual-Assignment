@@ -1,4 +1,4 @@
-package com.csc340.assignment4.animal;
+package com.csc340.assignment5.animal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,11 +33,11 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 
     /**
      * Query to match by scientific name
-     * @param scientificName
+     * @param scientific_name
      * @return
      */
-    @Query(value = "SELECT * FROM animal WHERE scientificName LIKE %:scientificName%", nativeQuery = true)
-    List<Animal> getAnimalByScientificName(String scientificName);
+    @Query(value = "SELECT * FROM animal WHERE scientific_name LIKE %:scientific_name%", nativeQuery = true)
+    List<Animal> getAnimalByScientificName(String scientific_name);
 
     /**
      * Query to extract animals by habitat

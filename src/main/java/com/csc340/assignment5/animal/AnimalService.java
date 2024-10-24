@@ -1,4 +1,4 @@
-package com.csc340.assignment4.animal;
+package com.csc340.assignment5.animal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

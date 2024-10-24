@@ -1,4 +1,4 @@
-package com.csc340.assignment4.animal;
+package com.csc340.assignment5.animal;
 
 import jakarta.persistence.*;
 
@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int animalId;
+    private int animal_id;
 
     @Column(nullable=false)
     private String name;
@@ -23,26 +23,26 @@ public class Animal {
     private String habitat;
 
     @Column
-    private String scientificName;
+    private String scientific_name;
 
     @Column
     private String description;
 
     /**
      * Constructor to fill in all values
-     * @param animalId
+     * @param animal_id
      * @param name
      * @param species
      * @param habitat
-     * @param scientificName
+     * @param scientific_name
      * @param description
      */
-    public Animal(int animalId, String name, String species, String habitat, String scientificName, String description){
-        this.animalId = animalId;
+    public Animal(int animal_id, String name, String species, String habitat, String scientific_name, String description){
+        this.animal_id = animal_id;
         this.name = name;
         this.species = species;
         this.habitat = habitat;
-        this.scientificName = scientificName;
+        this.scientific_name = scientific_name;
         this.description = description;
     }
 
@@ -66,7 +66,7 @@ public class Animal {
     }
 
     public int getAnimalId() {
-        return animalId;
+        return animal_id;
     }
 
     public String getName() {
@@ -82,15 +82,15 @@ public class Animal {
     }
 
     public String getScientificName() {
-        return scientificName;
+        return scientific_name;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setAnimalId(int animalId) {
-        this.animalId = animalId;
+    public void setAnimalId(int animal_id) {
+        this.animal_id = animal_id;
     }
 
     public void setName(String name) {
@@ -105,8 +105,8 @@ public class Animal {
         this.habitat = habitat;
     }
 
-    public void setScientificName(String scientificName) {
-        this.scientificName = scientificName;
+    public void setScientificName(String scientific_name) {
+        this.scientific_name = scientific_name;
     }
 
     public void setDescription(String description) {

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../navbar.css" rel="stylesheet">
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" href="/animal/all">Animals</a>
+        <a href="/animal/create">Create</a>
+    </div>
+    <main>
+        <section>
+            <div>
+                <table>
+                    <tr>
+                        <th>Animal ID</th>
+                        <th>Name</th>
+                        <th>Species</th>
+                        <th>Habitat</th>
+                        <th>Scientific Name</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr data-th-each="animal : ${animalList}">
+                        <th data-th-text="${animal.animalId}" ></th>
+                        <th data-th-text="${animal.name}"></th>
+                        <th data-th-text="${animal.species}"></th>
+                        <th data-th-text="${animal.habitat}">Habitat</th>
+                        <th data-th-text="${animal.scientificName}"></th>
+                        <th data-th-text="${animal.description}"></th>
+                        <td><a data-th-href="@{/animal/{id} (id=${animal.animalId})}">View</a>
+                            <a data-th-href="@{/animal/update-form/{id} (id=${animal.animalId})}">Edit</a>
+                            <a data-th-href="@{/animal/delete/{id} (id=${animal.animalId})}">Delete</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>

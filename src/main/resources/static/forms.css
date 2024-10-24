@@ -1,0 +1,28 @@
+input {
+    border-radius: 25px;
+    height: 25px;
+    font-size: 18px;
+    padding: 0 15px;
+}
+
+button {
+    background-color: black;
+    color: whitesmoke;
+    border: solid 2px black;
+    font-weight: bold;
+    border-radius: 25px;
+    margin-top: 15px;
+    padding: 10px 20px;
+}
+
+br {
+   display: block;
+   margin: 15px 0;
+}
+
+form{
+    border-radius: 25px;
+    height: 25px;
+    font-size: 18px;
+    padding: 0 15px;
+}
