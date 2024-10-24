@@ -31,7 +31,8 @@ This form displays all animal information, but the animalId is set to readonly. 
 
 <h2>Deleting Animals</h2>
 <pre>
-  Deleting an animal is handled with a link from "All Animals" and "Animal Details" pages, but the link to do so is as follows:
+  Deleting an animal is handled with a link from "All Animals" 
+  and "Animal Details" pages, but the link to do so is as follows:
   'localhost:8080/delete/{animalId}'
 </pre>
 
