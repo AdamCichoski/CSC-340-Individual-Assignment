@@ -24,7 +24,7 @@
                         <th>Actions</th>
                     </tr>
                     <tr data-th-each="animal : ${animalList}">
-                        <th data-th-text="${animal.animalId}" ></th>
+                        <th ><a data-th-text="${animal.animalId}" data-th-href="@{/animal/{id} (id=${animal.animalId})}"></a></th>
                         <th data-th-text="${animal.name}"></th>
                         <th data-th-text="${animal.species}"></th>
                         <th data-th-text="${animal.habitat}">Habitat</th>
